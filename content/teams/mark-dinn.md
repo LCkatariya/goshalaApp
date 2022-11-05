@@ -1,6 +1,6 @@
 ---
-title: John Doe
-image: /images/authors/john-doe.jpg
+title: suresh saini
+image: /images/authors/mark-dinn.jpg
 description: this is meta description
 social:
   facebook: https://www.facebook.com/

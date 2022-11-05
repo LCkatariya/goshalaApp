@@ -8,19 +8,19 @@ import {
 } from "@lib/contentParser";
 import { parseMDX } from "@lib/utils/mdxParser";
 import { markdownify } from "@lib/utils/textConverter";
-import Authors from "@partials/Authors";
+import Teams from "@layouts/partials/Teams";
 
 // blog pagination
 const AuthorPagination = ({
   authorIndex,
-  authors,
+  teams,
   currentPage,
   pagination,
 }) => {
   const indexOfLastAuthor = currentPage * pagination;
   const indexOfFirstAuthor = indexOfLastAuthor - pagination;
-  const totalPages = Math.ceil(authors.length / pagination);
-  const currentAuthors = authors.slice(indexOfFirstAuthor, indexOfLastAuthor);
+  const totalPages = Math.ceil(teams.length / pagination);
+  const currentTeams = teams.slice(indexOfFirstAuthor, indexOfLastAuthor);
   const { frontmatter, content } = authorIndex;
   const { title } = frontmatter;
 
@@ -29,9 +29,9 @@ const AuthorPagination = ({
       <section className="section">
         <div className="container text-center">
           {markdownify(title, "h1", "h2 mb-16")}
-          <Authors authors={currentAuthors} />
+          <Teams teams={currentTeams} />
           <Pagination
-            section="authors"
+            section="teams"
             totalPages={totalPages}
             currentPage={currentPage}
           />
@@ -45,7 +45,7 @@ export default AuthorPagination;
 
 // get blog pagination slug
 export const getStaticPaths = () => {
-  const allSlug = getSinglePagesSlug("content/authors");
+  const allSlug = getSinglePagesSlug("content/teams");
   const { pagination } = config.settings;
   const totalPages = Math.ceil(allSlug.length / pagination);
   let paths = [];
@@ -68,14 +68,14 @@ export const getStaticPaths = () => {
 export const getStaticProps = async ({ params }) => {
   const currentPage = parseInt((params && params.slug) || 1);
   const { pagination } = config.settings;
-  const authors = getSinglePages("content/authors");
-  const authorIndex = await getListPage("content/authors");
+  const teams = getSinglePages("content/teams");
+  const authorIndex = await getListPage("content/teams");
   const mdxContent = await parseMDX(authorIndex.content);
 
   return {
     props: {
       pagination: pagination,
-      authors: authors,
+      teams: teams,
       currentPage: currentPage,
       authorIndex: authorIndex,
       mdxContent: mdxContent,

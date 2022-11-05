@@ -8,7 +8,7 @@ import Link from "next/link";
 import Share from "./components/Share";
 import SimilarPosts from "./partials/SimilarPosts";
 
-const PostSingle = ({ post, posts, authors, slug }) => {
+const PostSingle = ({ post, posts, teams, slug }) => {
   const { frontmatter, content, mdxContent } = post;
   let { description, title, date, image, categories, tags } = frontmatter;
   description = description ? description : content.slice(0, 120);
@@ -22,15 +22,15 @@ const PostSingle = ({ post, posts, authors, slug }) => {
             {markdownify(title, "h1", "h2")}
             <ul className="mt-4 mb-8 text-text">
               {/* <li className="mb-2 mr-4 inline-block">
-                {authors
+                {teams
                   .filter((author) =>
-                    frontmatter.authors
+                    frontmatter.teams
                       .map((author) => slugify(author))
                       .includes(slugify(author.frontmatter.title))
                   )
                   .map((author, i) => (
                     <Link
-                      href={`/authors/${slugify(author.frontmatter.title)}`}
+                      href={`/teams/${slugify(author.frontmatter.title)}`}
                       key={`author-${i}`}
                       passHref
                     >

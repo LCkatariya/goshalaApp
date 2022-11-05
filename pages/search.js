@@ -5,7 +5,7 @@ import { slugify } from "@lib/utils/textConverter";
 import { useSearchContext } from "context/state";
 import { useRouter } from "next/router";
 
-const SearchPage = ({ authors }) => {
+const SearchPage = ({ teams }) => {
   const router = useRouter();
   const { query } = router;
   const keyword = slugify(query.key);
@@ -37,7 +37,7 @@ const SearchPage = ({ authors }) => {
             Search results for <span className="text-primary">{query.key}</span>
           </h1>
           {searchResults.length > 0 ? (
-            <Posts posts={searchResults} authors={authors} />
+            <Posts posts={searchResults} teams={teams} />
           ) : (
             <div className="py-24 text-center text-h3 shadow">
               No Search Found
@@ -51,12 +51,12 @@ const SearchPage = ({ authors }) => {
 
 export default SearchPage;
 
-// get authors data
+// get teams data
 export const getStaticProps = () => {
-  const authors = getSinglePages("content/authors");
+  const teams = getSinglePages("content/teams");
   return {
     props: {
-      authors: authors,
+      teams: teams,
     },
   };
 };

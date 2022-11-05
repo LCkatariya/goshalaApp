@@ -7,7 +7,7 @@ import Posts from "@partials/Posts";
 const { blog_folder } = config.settings;
 
 // tag page
-const Tag = ({ tag, posts, authors }) => {
+const Tag = ({ tag, posts, teams }) => {
   return (
     <Base title={tag}>
       <div className="section">
@@ -15,7 +15,7 @@ const Tag = ({ tag, posts, authors }) => {
           <h1 className="h2 mb-8 text-center">
             Showing posts from <span className="text-primary">{tag}</span> tag
           </h1>
-          <Posts posts={posts} authors={authors} />
+          <Posts posts={posts} teams={teams} />
         </div>
       </div>
     </Base>
@@ -43,9 +43,9 @@ export const getStaticProps = ({ params }) => {
   const filterPosts = posts.filter((post) =>
     post.frontmatter.tags.find((tag) => slugify(tag).includes(params.tag))
   );
-  const authors = getSinglePages("content/authors");
+  const teams = getSinglePages("content/teams");
 
   return {
-    props: { posts: filterPosts, tag: params.tag, authors: authors },
+    props: { posts: filterPosts, tag: params.tag, teams: teams },
   };
 };

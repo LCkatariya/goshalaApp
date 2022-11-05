@@ -4,7 +4,7 @@ import { humanize, slugify } from "@lib/utils/textConverter";
 import Image from "next/image";
 import Link from "next/link";
 
-const Posts = ({ posts, authors, className }) => {
+const Posts = ({ posts, teams, className }) => {
   const { summary_length } = config.settings;
   return (
     <div className={`row space-y-16 ${className}`}>
@@ -26,15 +26,15 @@ const Posts = ({ posts, authors, className }) => {
           )}
           {/* <ul className="mt-4 text-text">
             <li className="mb-2 mr-4 inline-block">
-              {authors
+              {teams
                 .filter((author) =>
-                  post.frontmatter.authors
+                  post.frontmatter.teams
                     .map((author) => slugify(author))
                     .includes(slugify(author.frontmatter.title))
                 )
                 .map((author, i) => (
                   <Link
-                    href={`/authors/${slugify(author.frontmatter.title)}`}
+                    href={`/teams/${slugify(author.frontmatter.title)}`}
                     key={`author-${i}`}
                     passHref
                   >

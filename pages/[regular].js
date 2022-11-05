@@ -15,7 +15,7 @@ import {
 const { blog_folder } = config.settings;
 
 // for all regular pages
-const RegularPages = ({ slug, data, postSlug, authors, posts }) => {
+const RegularPages = ({ slug, data, postSlug, teams, posts }) => {
   const { title, meta_title, description, image, noindex, canonical, layout } =
     data.frontmatter;
   const { content } = data;
@@ -31,7 +31,7 @@ const RegularPages = ({ slug, data, postSlug, authors, posts }) => {
     >
       {/* single post */}
       {postSlug.includes(slug) ? (
-        <PostSingle slug={slug} post={data} authors={authors} posts={posts} />
+        <PostSingle slug={slug} post={data} teams={teams} posts={posts} />
       ) : layout === "404" ? (
         <NotFound data={data} />
       ) : layout === "about" ? (
@@ -70,7 +70,7 @@ export const getStaticProps = async ({ params }) => {
   // get posts folder slug for filtering
   const postSlug = getSinglePagesSlug(`content/${blog_folder}`);
   // aughor data
-  const authors = getSinglePages("content/authors");
+  const teams = getSinglePages("content/teams");
   // all single pages
   const posts = getSinglePages(`content/${blog_folder}`);
 
@@ -79,7 +79,7 @@ export const getStaticProps = async ({ params }) => {
       slug: regular,
       data: allPages,
       postSlug: postSlug,
-      authors: authors,
+      teams: teams,
       posts: posts,
     },
   };

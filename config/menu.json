@@ -22,8 +22,8 @@
       "hasChildren": true,
       "children": [
         {
-          "name": "Authors",
-          "url": "/authors"
+          "name": "Teams",
+          "url": "/teams"
         },
         {
           "name": "Categories",
